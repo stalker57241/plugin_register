@@ -4,7 +4,7 @@ local vis = _G.vis
 local modules = {}
 -- module_path : module
 
-function generate_meta(name, version)
+function _G.generate_meta(name, version)
 	return {
 		name = name,
 		version = version
