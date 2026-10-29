@@ -2,7 +2,7 @@
 
 Small API util for checking and loading plugins
 
-# Usage
+## Usage
 
 ```lua
 require('plugins/plugin_register')
@@ -13,8 +13,12 @@ end
 ```
 
 
-# To-dos
+## To-dos
 
 - [ ] Extend to get meta info from plugin
 - [ ] Select standard for meta info
 - [ ] Improve API
+
+## For developers
+
+[`API`](https://github.com/stalker57241/plugin_register/blob/general/API.md)
