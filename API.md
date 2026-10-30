@@ -2,7 +2,7 @@
 
 ## Plugins
 
-### `generate_meta(name, version)`
+### `generate_meta(modulename, version)`
 
 Generated metadata for plugin
 
@@ -12,9 +12,13 @@ Generated metadata for plugin
 
 Loads plugin from `path`
 
-**Caution**: No null protection
+**Returns**:
+1. module API or nil
+2. modulename or nil
 
-### `loaded(path)`
+**Caution**: No null protection for path
+
+### `loaded(modulename)`
 
 Checks, is `plugin_register` loaded plugin
 
@@ -24,20 +28,10 @@ Checks, is `plugin_register` loaded plugin
 
 ## Getters
 
-### `getstate(path)`
+### `getstate(modulename)`
 
 **Returns** api of module from that path
 
-### `getbyname(name)`
+### `getbyname(modulename)`
 
 Searches module by their name
-
-## Swiftness
-
-### `getstate`
-
-O(1), because gets module by initial index
-
-### `getbyname`
-
-O(n), because iterates over modules and checks name
