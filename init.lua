@@ -1,8 +1,12 @@
+--[[
+AUTHOR: stalker57241
+DESCRIPTION: Utility to store state of module loading for intermodule interaction
+]]
 local vis = _G.vis
 
 
 local modules = {}
--- module_path : module
+-- module_name : module
 
 function _G.generate_meta(name, version)
 	return {
@@ -11,22 +15,29 @@ function _G.generate_meta(name, version)
 	}
 end
 
+--[[
+Loads plugin at path
+
+Returns:
+1. module if module loaded else nil
+2. modulename to access module if module loaded else nil too
+]]
 function _G.load(path)
-	modules[path] = require(path)
-	return modules[path]
+	local module = require(path)
+	if module == nil then return nil, nil end
+	if module.meta == nil then return nil, nil end
+	modules[module.meta.name] = module
+	return module, module.meta.name
 end
-
-function _G.loaded(path)
-	return modules[path] ~= nil
+--[[
+Checks, is module with modulename loaded
+]]
+function _G.loaded(modulename)
+	return modules[modulename] ~= nil
 end
-
-function _G.getstate(path)
-	return modules[path]
-end
-
-function _G.getbyname(name)
-	for _, module in ipairs(modules) do
-		if module.meta.name == name then return module end
-	end
-	return nil
+--[[
+Gets loaded module API by modulename
+]]
+function _G.getbyname(modulename)
+	return modules[modulename]
 end
